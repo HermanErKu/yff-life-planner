@@ -1,17 +1,18 @@
-import { View, StyleSheet, Text, TextInput } from 'react-native';
+import { View, StyleSheet, Text, TextInput, Button } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import News from '../EgdeAiOppgave/src/News';
-import Calendar from '../EgdeAiOppgave/src/Calendar';
-import BusPrediction from '../EgdeAiOppgave/src/BusPrediction';
+import TestComponent from '../yff-life-planner/src/testComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const SecondScreen = () => {
     const [data, setData] = useState(null);
     const [busstopp, setBusstopp] = useState("lys");
 
+    
 
     const updateBusstopp = (input) => {
         setBusstopp(input);
+        async input => await AsyncStorage.setItem('busStopStore', input)
 
         fetch('https://rp.akt.no/scripts/TravelMagic/TravelMagicWE.dll/StageJSON?query='+busstopp, {headers: {'Content-Type': 'application/json'}})
         .then(response => response.json())
@@ -20,14 +21,15 @@ const SecondScreen = () => {
     }
     
 
-  return (
+    return (
     <View style={styles.container}>
-      <Text style={{textAlign:'center'}}>Hvilken buss tar du? (eks: M1, 40){'\n'}</Text>
+      {/*<Text style={{textAlign:'center'}}>Hvilken buss tar du? (eks: M1, 40){'\n'}</Text>*/}
+      <Text style={{textAlign:'center'}}>Hvilket busstopp tar du buss fra?{'\n'}</Text>
       <TextInput
         style={{ paddingTop:20, height: 40, width:"90%", alignSelf:"center", borderColor: 'gray', borderWidth: 1 }}
         onChangeText={text => updateBusstopp(text)}
       />
-      {data ? <Text>{data.suggestions}</Text> : <Text>Test</Text>}
+      {data ? <Text>{data['suggestions']}</Text> : <Text>Test</Text>}
     </View>
   );
 };

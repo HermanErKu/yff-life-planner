@@ -1,8 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Button } from 'react-native';
-import News from '../EgdeAiOppgave/src/News';
-import Calendar from '../EgdeAiOppgave/src/Calendar';
-import BusPrediction from '../EgdeAiOppgave/src/BusPrediction';
+import { View, StyleSheet, Button, Text } from 'react-native';
 import * as Updates from 'expo-updates';
 
 const HomeScreen = () => {
@@ -16,18 +13,7 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Button title="Refresh App" onPress={refreshApp} />
-      <View style={styles.news}>
-        <News />
-      </View>
-      <View style={styles.line} />
-      <View style={styles.calendar}>
-        <Calendar />
-      </View>
-      <View style={styles.line} />
-      <View style={styles.busPrediction}>
-        <BusPrediction />
-      </View>
+      <Text>penis</Text>
     </View>
   );
 };

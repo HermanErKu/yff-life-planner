@@ -13,7 +13,7 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text>penis</Text>
+      <Text>test</Text>
     </View>
   );
 };

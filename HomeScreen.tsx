@@ -2,6 +2,8 @@ import React from 'react';
 import { View, StyleSheet, Button, Text } from 'react-native';
 import * as Updates from 'expo-updates';
 
+import News from '../yff-life-planner/src/NewsComponent';
+
 const HomeScreen = () => {
     const refreshApp = async () => {
         try {
@@ -14,6 +16,7 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text>test</Text>
+      <News />
     </View>
   );
 };

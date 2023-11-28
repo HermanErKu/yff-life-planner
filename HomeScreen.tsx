@@ -16,7 +16,7 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text>test</Text>
-      <News />
+      {/*<News/>*/}
     </View>
   );
 };

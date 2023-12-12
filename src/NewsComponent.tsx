@@ -14,7 +14,7 @@ interface ApiResponse {
 const News = () => {
     const [data, setData] = useState<ApiResponse | null>(null);
 
-    const apiKey = process.env.NEWS_API_KEY;
+    const apiKey = process.env.EXPO_PUBLIC_NEWS_API_KEY;
 
     useEffect(() => {
         fetch('https://newsapi.org/v2/top-headlines?country=no&apiKey='+apiKey, {headers: {'Content-Type': 'application/json'}})
@@ -25,12 +25,12 @@ const News = () => {
 
     const map = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
     const elements = map.map((item, index) => (
-        <Text key={item}>{data ? data.articles[index].title: 'Loading...'} {'\n'}</Text>
+        <Text key={item}>{data && data.articles && data.articles[index] ? data.articles[index].title: 'Loading...'} {'\n'}</Text>
     ));
 
     return (
         <ScrollView>
-        {elements}
+            {elements}
         </ScrollView>
     );
 };

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
-
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import * as Linking from 'expo-linking';
+import * as WebBrowser from 'expo-web-browser';
 
 interface Article {
     title: string;
+    url: string;
 }
 
 interface ApiResponse {
@@ -25,7 +27,11 @@ const News = () => {
 
     const map = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
     const elements = map.map((item, index) => (
-        <Text key={item}>{data && data.articles && data.articles[index] ? data.articles[index].title: 'Loading...'} {'\n'}</Text>
+        <View key={item}>
+            <TouchableOpacity onPress={() => WebBrowser.openBrowserAsync(data.articles[index].url)}>
+                <Text>{data && data.articles && data.articles[index] ? data.articles[index].title: 'Loading...'} {'\n'}</Text>
+            </TouchableOpacity>
+        </View>
     ));
 
     return (

@@ -2,7 +2,8 @@ import React from 'react';
 import { View, StyleSheet, Button, Text } from 'react-native';
 import * as Updates from 'expo-updates';
 
-import News from '../yff-life-planner/src/NewsComponent';
+import News from './src/NewsComponent';
+import ItsLearning from './src/ItsLearningComponent';
 
 const HomeScreen = () => {
     const refreshApp = async () => {
@@ -16,7 +17,8 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text>test</Text>
-      {/*<News/>*/}
+      <News/>
+      <ItsLearning/>
     </View>
   );
 };

@@ -22,29 +22,42 @@ const SecondScreen = () => {
     
 
     return (
-    <View style={styles.container}>
-      {/*<Text style={{textAlign:'center'}}>Hvilken buss tar du? (eks: M1, 40){'\n'}</Text>*/}
-      <Text style={{textAlign:'center'}}>Hvilket busstopp tar du buss fra?{'\n'}</Text>
-      <TextInput
-        style={{ paddingTop:20, height: 40, width:"90%", alignSelf:"center", borderColor: 'gray', borderWidth: 1 }}
-        onChangeText={text => updateBusstopp(text)}
-      />
-      {data ? <Text>{data['suggestions']}</Text> : <Text>Test</Text>}
-    </View>
+        <View style={styles.container}>
+            <Text style={{textAlign:'center'}}>Hvilket busstopp tar du buss fra?{'\n'}</Text>
+            <TextInput
+                style={{ paddingTop:20, height: 40, width:"90%", alignSelf:"center", borderColor: 'gray', borderWidth: 1 }}
+                onChangeText={text => updateBusstopp(text)}
+            />
+            {data ? <Text>{data['suggestions']}</Text> : <Text>Test</Text>}
+            <View style={styles.line} />
+            
+            <View>
+                <Text>Test</Text>
+            </View>
+        </View>
   );
 };
 
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    paddingBottom: 400,
-    alignItems: 'center',
-  },
-  section: {
-    flex: 1,
-  },
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        paddingBottom: 400,
+        alignItems: 'center',
+        
+    },
+    section: {
+        flex: 1,
+    },
+    line: {
+        height: 2,
+        width: "100%",
+        backgroundColor: 'gray',
+        marginTop: 15,
+        marginBottom: 15,
+    },
 });
 
 export default SecondScreen;

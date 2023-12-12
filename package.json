@@ -20,9 +20,13 @@
     "expo-updates": "~0.18.17",
     "react": "18.2.0",
     "react-native": "0.72.6",
+    "react-native-htmlview": "^0.17.0",
+    "react-native-render-html": "^6.3.4",
     "react-native-rss-parser": "^1.5.1",
     "react-navigation": "^5.0.0",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.3",
+    "expo-linking": "~5.0.2",
+    "expo-web-browser": "~12.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, TextInput, Button } from 'react-native';
+import { View, StyleSheet, Text, TextInput, Button, Switch } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import TestComponent from '../yff-life-planner/src/testComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -19,7 +19,24 @@ const SecondScreen = () => {
         .then(data => setData(data))
         .catch(error => console.error(error));
     }
-    
+
+
+    const [inAppBrowser, setInAppBrowser] = useState(true);
+    const toggleBrowserSwitch = () => {
+        setInAppBrowser(previousState => !previousState);
+        async inAppBrowser => await AsyncStorage.setItem('inAppBrowser', inAppBrowser);   
+    }
+
+    const updateSwitchesFromSave = async () => {
+        const inAppBrowserGet = await AsyncStorage.getItem("inAppBrowser")
+        //if (inAppBrowserGet) setInAppBrowser(inAppBrowserGet);
+    }
+
+    useEffect(() => {
+        updateSwitchesFromSave();
+    }, [inAppBrowser, updateSwitchesFromSave]);
+
+
 
     return (
         <View style={styles.container}>
@@ -34,6 +51,17 @@ const SecondScreen = () => {
             <View>
                 <Text>Test</Text>
             </View>
+            
+            
+            <Text>{'\n\n\n'}In app browser:{'\n'}</Text>
+            <Switch
+                trackColor={{false: '#767577', true: '#81b0ff'}}
+                thumbColor={inAppBrowser ? '#f5dd4b' : '#f4f3f4'}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleBrowserSwitch}
+                value={inAppBrowser}
+            />
+            <Text>{'\n'}{inAppBrowser.toString()}</Text>
         </View>
   );
 };

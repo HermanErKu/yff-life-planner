@@ -16,6 +16,7 @@ Your calendar, meetings, favourite news sources and bus / driving times all in o
 - [ ] Calendar integration (outside calendars (visma, outlook, google))
 - [ ] Custom app icons
 - [ ] Vegvesen.no API
+- [X] ItsLearning rss feed
 
 
 # Run app

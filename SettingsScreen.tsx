@@ -22,21 +22,24 @@ const SecondScreen = () => {
 
 
     const [inAppBrowser, setInAppBrowser] = useState(true);
-    const toggleBrowserSwitch = () => {
+    const toggleBrowserSwitch = async () => {
         setInAppBrowser(previousState => !previousState);
-        async inAppBrowser => await AsyncStorage.setItem('inAppBrowser', inAppBrowser);   
+        let stateString = (!inAppBrowser).toString();
+        await AsyncStorage.setItem('inAppBrowser', stateString);   
     }
 
     const updateSwitchesFromSave = async () => {
         const inAppBrowserGet = await AsyncStorage.getItem("inAppBrowser")
-        //if (inAppBrowserGet) setInAppBrowser(inAppBrowserGet);
+        if (inAppBrowserGet == "true") {
+            setInAppBrowser(true)   
+        }
+        else
+        {
+            setInAppBrowser(false)
+        }
     }
 
-    useEffect(() => {
-        updateSwitchesFromSave();
-    }, [inAppBrowser, updateSwitchesFromSave]);
-
-
+    updateSwitchesFromSave();
 
     return (
         <View style={styles.container}>

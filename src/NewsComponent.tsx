@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface Article {
     title: string;
@@ -25,10 +26,21 @@ const News = () => {
         .catch(error => console.error(error));
     }, []);
 
+    const openLinkInBrowser = async (link) => {
+        const inAppBrowser = await AsyncStorage.getItem("inAppBrowser");
+        if (inAppBrowser == 'true'){
+            WebBrowser.openBrowserAsync(link);
+        }
+        else
+        {
+            Linking.openURL(link);
+        }
+    }
+
     const map = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
     const elements = map.map((item, index) => (
         <View key={item}>
-            <TouchableOpacity onPress={() => WebBrowser.openBrowserAsync(data.articles[index].url)}>
+            <TouchableOpacity onPress={() => openLinkInBrowser(data.articles[index].url)}>
                 <Text>{data && data.articles && data.articles[index] ? data.articles[index].title: 'Loading...'} {'\n'}</Text>
             </TouchableOpacity>
         </View>

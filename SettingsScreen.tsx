@@ -2,13 +2,22 @@ import { View, StyleSheet, Text, TextInput, Button, Switch } from 'react-native'
 import React, { useEffect, useState } from 'react';
 import TestComponent from '../yff-life-planner/src/testComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Updates from 'expo-updates';
 
 
 const SecondScreen = () => {
     const [data, setData] = useState(null);
     const [busstopp, setBusstopp] = useState("lys");
 
-    
+    const refreshApp = async () => {
+        try {
+          await Updates.reloadAsync();
+        } catch (e) {
+          console.error(e);
+        }
+    };
+
+
 
     const updateBusstopp = (input) => {
         setBusstopp(input);
@@ -25,13 +34,15 @@ const SecondScreen = () => {
     const toggleBrowserSwitch = async () => {
         setInAppBrowser(previousState => !previousState);
         let stateString = (!inAppBrowser).toString();
-        await AsyncStorage.setItem('inAppBrowser', stateString);   
+        await AsyncStorage.setItem('inAppBrowser', stateString);  
+        
+        refreshApp();
     }
 
     const updateSwitchesFromSave = async () => {
         const inAppBrowserGet = await AsyncStorage.getItem("inAppBrowser")
         if (inAppBrowserGet == "true") {
-            setInAppBrowser(true)   
+            setInAppBrowser(true)
         }
         else
         {

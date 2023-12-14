@@ -26,8 +26,7 @@ const ItsLearning = () => {
 
     const openLinkInBrowser = async (link) => {
         const inAppBrowser = await AsyncStorage.getItem("inAppBrowser");
-
-        if (inAppBrowser === 'true'){
+        if (inAppBrowser == 'true'){
             WebBrowser.openBrowserAsync(link);
         }
         else

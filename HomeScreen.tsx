@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Button, Text } from 'react-native';
 import * as Updates from 'expo-updates';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import News from './src/NewsComponent';
 import ItsLearning from './src/ItsLearningComponent';
 import Travel from './src/TravelComponent'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = () => {
     const [travelState, setTravelState] = useState(true);

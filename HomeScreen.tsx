@@ -15,10 +15,7 @@ const HomeScreen = () => {
     };
 
   return (
-    <View style={styles.container}>
-      <Button title="Refresh App" onPress={refreshApp} />
-      
-      <Text>test</Text>
+    <View style={styles.container}>      
       <News/>
       <ItsLearning/>
     </View>

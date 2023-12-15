@@ -6,9 +6,6 @@ import * as Updates from 'expo-updates';
 
 
 const SecondScreen = () => {
-    const [data, setData] = useState(null);
-    const [busstopp, setBusstopp] = useState("lys");
-
     const refreshApp = async () => {
         try {
           await Updates.reloadAsync();
@@ -16,8 +13,10 @@ const SecondScreen = () => {
           console.error(e);
         }
     };
-
-
+    
+    
+    const [data, setData] = useState(null);
+    const [busstopp, setBusstopp] = useState("lys");
 
     const updateBusstopp = (input) => {
         setBusstopp(input);
@@ -29,25 +28,32 @@ const SecondScreen = () => {
         .catch(error => console.error(error));
     }
 
-
     const [inAppBrowser, setInAppBrowser] = useState(true);
     const toggleBrowserSwitch = async () => {
         setInAppBrowser(previousState => !previousState);
-        let stateString = (!inAppBrowser).toString();
-        await AsyncStorage.setItem('inAppBrowser', stateString);  
+        let stateStringBrowser = (!inAppBrowser).toString();
+        await AsyncStorage.setItem('inAppBrowser', stateStringBrowser);  
         
         refreshApp();
     }
 
+
+    const [itslearning, setItslearning] = useState(true);
+    const toggleItslearningSwitch = async () => {
+        setItslearning(previousState => !previousState);
+        let stateStringItslearning = (!itslearning).toString();
+        await AsyncStorage.setItem('itslearning', stateStringItslearning);  
+        
+        refreshApp();
+    }
+
+
     const updateSwitchesFromSave = async () => {
         const inAppBrowserGet = await AsyncStorage.getItem("inAppBrowser")
-        if (inAppBrowserGet == "true") {
-            setInAppBrowser(true)
-        }
-        else
-        {
-            setInAppBrowser(false)
-        }
+        if (inAppBrowserGet == "true") { setInAppBrowser(true) } else { setInAppBrowser(false) }
+        
+        const itsLearningGet = await AsyncStorage.getItem("itslearning")
+        if (itsLearningGet == "true") { setItslearning(true) } else { setItslearning(false) }
     }
 
     updateSwitchesFromSave();
@@ -62,12 +68,9 @@ const SecondScreen = () => {
             {data ? <Text>{data['suggestions']}</Text> : <Text>Test</Text>}
             <View style={styles.line} />
             
-            <View>
-                <Text>Test</Text>
-            </View>
             
-            
-            <Text>{'\n\n\n'}In app browser:{'\n'}</Text>
+            {/* In app browser switch */}
+            <Text>{'\n'}In app browser:{'\n'}</Text>
             <Switch
                 trackColor={{false: '#767577', true: '#81b0ff'}}
                 thumbColor={inAppBrowser ? '#f5dd4b' : '#f4f3f4'}
@@ -76,6 +79,19 @@ const SecondScreen = () => {
                 value={inAppBrowser}
             />
             <Text>{'\n'}{inAppBrowser.toString()}</Text>
+
+
+
+            {/* ItsLearning switch */}
+            <Text>{'\n'}ItsLearning updates:{'\n'}</Text>
+            <Switch
+                trackColor={{false: '#767577', true: '#81b0ff'}}
+                thumbColor={itslearning ? '#f5dd4b' : '#f4f3f4'}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleItslearningSwitch}
+                value={itslearning}
+            />
+            <Text>{'\n'}{itslearning.toString()}</Text>
         </View>
   );
 };
@@ -86,7 +102,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        paddingBottom: 400,
+        paddingBottom: 200,
         alignItems: 'center',
         
     },

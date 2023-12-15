@@ -1,52 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Button, Text } from 'react-native';
 import * as Updates from 'expo-updates';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import News from './src/NewsComponent';
 import ItsLearning from './src/ItsLearningComponent';
+import Travel from './src/TravelComponent'
 
 const HomeScreen = () => {
-    const refreshApp = async () => {
-        try {
-          await Updates.reloadAsync();
-        } catch (e) {
-          console.error(e);
-        }
-    };
+    const [travelState, setTravelState] = useState(true);
+    const [newsState, setNewsState] = useState(true);
+    const [itslearningState, setItslearningState] = useState(true);
 
-  return (
-    <View style={styles.container}>      
-      <News/>
-      <ItsLearning/>
-    </View>
-  );
+    const getSavedStates = async () => {
+        const travelGet = await AsyncStorage.getItem("travel");
+        if (travelGet == "true") { setTravelState(true) } else { setTravelState(false) };
+
+        const newsGet = await AsyncStorage.getItem("news");
+        if (newsGet == "true") { setNewsState(true) } else { setNewsState(false) };
+
+        const itslearningGet = await AsyncStorage.getItem("itslearning");
+        if (itslearningGet == "true") { setItslearningState(true) } else { setItslearningState(false) };
+    }
+
+    getSavedStates();
+
+    return (
+        <View style={styles.container}>
+            
+            {/* Travel Component */}
+            {travelState ? <View style={styles.travel}><Travel /></View> : null}
+
+            {/* News Component */}
+            {newsState ? <View style={styles.line} /> : null}
+            {newsState ? <View style={styles.news}><News/></View> : null}
+
+            {/* ItsLearning Component */}
+            {itslearningState ? <View style={styles.line} /> : null}
+            {itslearningState ? <View style={styles.calendar}><ItsLearning /></View> : null}
+        </View>
+    );
 };
 
-/*const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    marginLeft: 8,
-    marginRight: 8,
-    marginTop: 8,
-    marginBottom: 8,
-  },
-  news: {
-    flex: 3,
-    marginBottom: 20,
-    marginTop: 15,
-    backgroundColor: "#D3D3D3",
-  },
-  calendar: {
-    flex: 1,
-    marginBottom: 20,
-    backgroundColor: '#DCDCDC',
-  },
-  busPrediction: {
-    flex: 2,
-    backgroundColor: '#C0C0C0',
-  },
-});*/
 
 const styles = StyleSheet.create({
     container: {
@@ -57,13 +51,13 @@ const styles = StyleSheet.create({
       marginTop: 8,
     },
     news: {
-      flex: 3,
+      flex: 4,
       marginTop: 15,
     },
     calendar: {
-      flex: 1,
+      flex: 4,
     },
-    busPrediction: {
+    travel: {
       flex: 2,
     },
     line: {

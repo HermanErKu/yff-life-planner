@@ -33,33 +33,71 @@ const SecondScreen = () => {
         setInAppBrowser(previousState => !previousState);
         let stateStringBrowser = (!inAppBrowser).toString();
         await AsyncStorage.setItem('inAppBrowser', stateStringBrowser);  
-        
-        refreshApp();
     }
 
 
+
+    const [travel, setTravel] = useState(true);
+    const toggleTravelSwitch = async () => {
+        setTravel(previousState => !previousState);
+        let stateStringTravel = (!travel).toString();
+        await AsyncStorage.setItem('travel', stateStringTravel);
+    }
+    const [news, setNews] = useState(true);
+    const toggleNewsSwitch = async () => {
+        setNews(previousState => !previousState);
+        let stateStringNews = (!news).toString();
+        await AsyncStorage.setItem("news", stateStringNews);
+    }
     const [itslearning, setItslearning] = useState(true);
     const toggleItslearningSwitch = async () => {
         setItslearning(previousState => !previousState);
         let stateStringItslearning = (!itslearning).toString();
         await AsyncStorage.setItem('itslearning', stateStringItslearning);  
-        
-        refreshApp();
     }
 
+    const [isBussing, setIsBussing] = useState(true);
+    const toggleIsBussingSwitch = async () => {
+        setIsBussing(previousState => !previousState);
+        let stateStringIsBussing = (!isBussing).toString();
+        await AsyncStorage.setItem('isBussing', stateStringIsBussing);
+    }
 
     const updateSwitchesFromSave = async () => {
         const inAppBrowserGet = await AsyncStorage.getItem("inAppBrowser")
         if (inAppBrowserGet == "true") { setInAppBrowser(true) } else { setInAppBrowser(false) }
         
+        const travelGet = await AsyncStorage.getItem("travel");
+        if (travelGet == "true") { setTravel(true) } else { setTravel(false) }
+
+        const newsGet = await AsyncStorage.getItem("news");
+        if (newsGet == "true") { setNews(true) } else { setNews(false) }
+
         const itsLearningGet = await AsyncStorage.getItem("itslearning")
         if (itsLearningGet == "true") { setItslearning(true) } else { setItslearning(false) }
+
+        const isBussingGet = await AsyncStorage.getItem('isBussing');
+        if (isBussingGet == "true") { setIsBussing(true) } else { setIsBussing(false) }
     }
 
     updateSwitchesFromSave();
 
     return (
         <View style={styles.container}>
+            {/* Buss / bil switch */}
+            <Text>{'\n'}Tar du buss:{'\n'}</Text>
+            <Switch
+                trackColor={{false: '#767577', true: '#81b0ff'}}
+                thumbColor={isBussing ? '#f5dd4b' : '#f4f3f4'}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleIsBussingSwitch}
+                value={isBussing}
+            />
+            <Text>{'\n'}{isBussing.toString()}</Text>
+
+            
+            <View style={styles.line} />
+            {/*  */}
             <Text style={{textAlign:'center'}}>Hvilket busstopp tar du buss fra?{'\n'}</Text>
             <TextInput
                 style={{ paddingTop:20, height: 40, width:"90%", alignSelf:"center", borderColor: 'gray', borderWidth: 1 }}
@@ -68,7 +106,8 @@ const SecondScreen = () => {
             {data ? <Text>{data['suggestions']}</Text> : <Text>Test</Text>}
             <View style={styles.line} />
             
-            
+
+            <View style={styles.line} />
             {/* In app browser switch */}
             <Text>{'\n'}In app browser:{'\n'}</Text>
             <Switch
@@ -80,6 +119,31 @@ const SecondScreen = () => {
             />
             <Text>{'\n'}{inAppBrowser.toString()}</Text>
 
+            
+            {/* Layout Settings */}
+            <View style={styles.line} />
+            {/* Travel switch */}
+            <Text>{'\n'}Travel updates:{'\n'}</Text>
+            <Switch
+                trackColor={{false: '#767577', true: '#81b0ff'}}
+                thumbColor={travel ? '#f5dd4b' : '#f4f3f4'}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleTravelSwitch}
+                value={travel}
+            />
+            <Text>{'\n'}{travel.toString()}</Text>
+
+
+            {/* News switch */}
+            <Text>{'\n'}News updates:{'\n'}</Text>
+            <Switch
+                trackColor={{false: '#767577', true: '#81b0ff'}}
+                thumbColor={news ? '#f5dd4b' : '#f4f3f4'}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleNewsSwitch}
+                value={news}
+            />
+            <Text>{'\n'}{news.toString()}</Text>
 
 
             {/* ItsLearning switch */}

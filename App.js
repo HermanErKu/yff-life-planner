@@ -31,7 +31,7 @@ const App = () => {
     return (
         <NavigationContainer>
             <Tab.Navigator>
-                <Tab.Screen name="Home" component={HomeScreen} options={{tabBarIcon: ({ focused }) => (<Ionicons name={focused ? 'home' : 'home-outline'} size={26} style={{ marginBottom: -3 }}/>), headerLeft: () => ( <Ionicons onPress={() => refreshApp()} name={'refresh'} size={26} style={{ marginBottom: -3, marginLeft: 10, }}/> )}}/>
+                <Tab.Screen name="Home" onPress={() => refreshApp()} component={HomeScreen} options={{tabBarIcon: ({ focused }) => (<Ionicons onPress={() => refreshApp()} name={focused ? 'home' : 'home-outline'} size={26} style={{ marginBottom: -3 }}/>), headerLeft: () => ( <Ionicons onPress={() => refreshApp()} name={'refresh'} size={26} style={{ marginBottom: -3, marginLeft: 10, }}/> )}}/>
                 <Tab.Screen name="Settings" component={SettingsScreen} options={{tabBarIcon: ({ focused }) => (<Ionicons name={focused ? 'settings' : 'settings-outline'} size={26} style={{ marginBottom: -3 }}/>),}}/>
             </Tab.Navigator>
         </NavigationContainer>

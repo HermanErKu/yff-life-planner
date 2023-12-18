@@ -51,14 +51,14 @@ const styles = StyleSheet.create({
       marginTop: 8,
     },
     news: {
-      flex: 4,
+      flex: 40,
       marginTop: 15,
     },
     calendar: {
-      flex: 4,
+      flex: 40,
     },
     travel: {
-      flex: 2,
+      flex: 20,
     },
     line: {
       height: 2,

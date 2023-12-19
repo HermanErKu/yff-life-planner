@@ -1,6 +1,5 @@
 import { View, StyleSheet, Text, TextInput, Button, Switch, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import TestComponent from '../yff-life-planner/src/testComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Updates from 'expo-updates';
 

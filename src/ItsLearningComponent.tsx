@@ -22,52 +22,65 @@ const ItsLearning = () => {
 
 
     const rssUrl = process.env.EXPO_PUBLIC_ITSLEARNING_LINK; 
-    const rssList = process.env.EXPO_PUBLIC_ITSLEARNING_LINKS_LIST;    
-
+    const rssList = process.env.EXPO_PUBLIC_ITSLEARNING_LINKS_LIST; 
+        
+    
     const [rssData, setRssData] = useState([]);
 
-    const loopTroughRSS = (rssList) => {
+    /*const loopTroughRSS = (rssList) => {
+        rssList = rssList.split(",");
         for (let x = 0; x < rssList.length; x++) {
             const element = rssList[x];
-            console.log(element);
-            
+            //console.log(element);
+        
+
+
+            useEffect(() => {
+                fetch(element)
+                    .then(response => response.text())
+                    .then(responseData => RSSParser.parse(responseData))
+                    .then(rss => {
+                        if (Array.isArray(rss.items)) {
+                            setRssData(rss.items);
+                        }
+                    })
+                    .catch(error => console.log(error)
+                    );
+            }, []);
         }
+    }*/
+
+    useEffect(() => {
+        fetch(rssUrl)
+            .then(response => response.text())
+            .then(responseData => RSSParser.parse(responseData))
+            .then(rss => {
+                if (Array.isArray(rss.items)) {
+                    setRssData(rss.items);
+                }
+            })
+            .catch(error => console.log(error)
+            );
+    }, []);
 
 
-        useEffect(() => {
-            fetch(rssUrl)
-                .then(response => response.text())
-                .then(responseData => RSSParser.parse(responseData))
-                .then(rss => {
-                    if (Array.isArray(rss.items)) {
-                        setRssData(rss.items);
-                    }
-                });
-        }, []);
-
-        const map = [0, 1, 2];
-        const elements = map.map((item, index) => (
-            <View key={item}>
-                <Text style={{ fontSize: 20 }}>{rssData && rssData[index] && rssData[index].title}</Text>
-                <TouchableOpacity onPress={() => openLinkInBrowser(rssData && rssData[index] && rssData[index].links[0].url)}>
-                    <Text>{rssData && rssData[index] && rssData[index].links[0].url} {'\n'}</Text>
-                </TouchableOpacity>
-            </View>
-        ));
-
-        console.log(elements);
-    }
-
-    loopTroughRSS(rssList);
-     
+    const map = [0, 1, 2];
+    const list = [];
+    const elements = map.map((item, index) => (
+        <View key={item}>
+            <Text style={{ fontSize: 20 }}>{rssData && rssData[index] && rssData[index].title}</Text>
+            <TouchableOpacity onPress={() => openLinkInBrowser(rssData && rssData[index] && rssData[index].links[0].url)}>
+                <Text>{rssData && rssData[index] && rssData[index].links[0].url} {'\n'}</Text>
+            </TouchableOpacity>
+        </View>
+    ));
+    
+         
  
     return (
-        /*<ScrollView>
+        <ScrollView>
             {elements}
-        </ScrollView>*/
-        <View>
-            <Text>text</Text>
-        </View>
+        </ScrollView>
     )
  }
  

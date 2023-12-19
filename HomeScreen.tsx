@@ -31,7 +31,7 @@ const HomeScreen = () => {
             {travelState ? <View style={styles.travel}><Travel /></View> : null}
 
             {/* News Component */}
-            {newsState ? <View style={styles.line} /> : null}
+            {travelState && newsState ? <View style={styles.line} /> : null}
             {newsState ? <View style={styles.news}><News/></View> : null}
 
             {/* ItsLearning Component */}

@@ -65,7 +65,6 @@ const ItsLearning = () => {
 
 
     const map = [0, 1, 2];
-    const list = [];
     const elements = map.map((item, index) => (
         <View key={item}>
             <Text style={{ fontSize: 20 }}>{rssData && rssData[index] && rssData[index].title}</Text>

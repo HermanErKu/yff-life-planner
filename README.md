@@ -18,6 +18,7 @@ Your calendar, meetings, favourite news sources and bus / driving times all in o
 - [ ] Vegvesen.no API
 - [X] AKT homemade API
 - [X] ItsLearning rss feed
+- [ ] Google Maps Places API (expensive)
 
 
 # Run app

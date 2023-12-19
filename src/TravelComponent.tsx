@@ -41,7 +41,6 @@ const Travel = () => {
         else if (isDriving == true) {
             //do vegvesen api (fix later)
         }
-
     }, []);
     
 

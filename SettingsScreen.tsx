@@ -94,7 +94,7 @@ const SecondScreen = () => {
                     onValueChange={toggleIsBussingSwitch}
                     value={isBussing}
                 />
-                <Text>{'\n'}{isBussing.toString()}</Text>
+                <Text>{'\n'}{isBussing ? "Ja" : "Nei"}</Text>
 
                 
                 {/* Hvilket busstopp (er ikke ferdig med api enda) */}
@@ -130,7 +130,7 @@ const SecondScreen = () => {
                     onValueChange={toggleBrowserSwitch}
                     value={inAppBrowser}
                 />
-                <Text>{'\n'}{inAppBrowser.toString()}</Text>
+                <Text>{'\n'}{inAppBrowser ? "På" : "Av"}</Text>
 
                 
                 {/* Layout Settings */}
@@ -144,7 +144,7 @@ const SecondScreen = () => {
                     onValueChange={toggleTravelSwitch}
                     value={travel}
                 />
-                <Text>{'\n'}{travel.toString()}</Text>
+                <Text>{'\n'}{travel ? "På" : "Av"}</Text>
 
 
                 {/* News switch */}
@@ -156,7 +156,7 @@ const SecondScreen = () => {
                     onValueChange={toggleNewsSwitch}
                     value={news}
                 />
-                <Text>{'\n'}{news.toString()}</Text>
+                <Text>{'\n'}{news ? "På" : "Av"}</Text>
 
 
                 {/* ItsLearning switch */}
@@ -168,7 +168,7 @@ const SecondScreen = () => {
                     onValueChange={toggleItslearningSwitch}
                     value={itslearning}
                 />
-                <Text>{'\n'}{itslearning.toString()}</Text>
+                <Text>{'\n'}{itslearning ? "På" : "Av"}</Text>
             </View>
         </ScrollView>
   );

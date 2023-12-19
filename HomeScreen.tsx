@@ -41,30 +41,32 @@ const HomeScreen = () => {
 };
 
 
+
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      flexDirection: 'column',
-      marginLeft: 8,
-      marginRight: 8,
-      marginTop: 8,
+        flex: 1,
+        flexDirection: 'column',
+        marginLeft: 8,
+        marginRight: 8,
+        marginTop: 8,
     },
     news: {
-      flex: 40,
-      marginTop: 15,
+        flex: 35,
+        marginTop: 15,
     },
     calendar: {
-      flex: 40,
+        flex: 40,
     },
     travel: {
-      flex: 20,
+        flex: 25,
     },
     line: {
-      height: 2,
-      backgroundColor: 'gray',
-      marginTop: 15,
-      marginBottom: 15,
+        height: 2,
+        backgroundColor: 'gray',
+        marginTop: 15,
+        marginBottom: 15,
     }
 });
+
 
 export default HomeScreen;

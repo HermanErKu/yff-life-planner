@@ -61,22 +61,31 @@ const SecondScreen = () => {
         let stateStringIsBussing = (!isBussing).toString();
         await AsyncStorage.setItem('isBussing', stateStringIsBussing);
     }
+    const [hacker, setHacker] = useState(false);
+    const toggleHackerModeSwitch = async () => {
+        setHacker(previousState => !previousState);
+        let stateStringHacker = (!hacker).toString();
+        await AsyncStorage.setItem('hacker', stateStringHacker);
+    }
 
     const updateSwitchesFromSave = async () => {
-        const inAppBrowserGet = await AsyncStorage.getItem("inAppBrowser")
-        if (inAppBrowserGet == "true") { setInAppBrowser(true) } else { setInAppBrowser(false) }
+        const inAppBrowserGet = await AsyncStorage.getItem("inAppBrowser");
+        if (inAppBrowserGet == "true") { setInAppBrowser(true); } else { setInAppBrowser(false); }
         
         const travelGet = await AsyncStorage.getItem("travel");
-        if (travelGet == "true") { setTravel(true) } else { setTravel(false) }
+        if (travelGet == "true") { setTravel(true); } else { setTravel(false); }
 
         const newsGet = await AsyncStorage.getItem("news");
-        if (newsGet == "true") { setNews(true) } else { setNews(false) }
+        if (newsGet == "true") { setNews(true); } else { setNews(false); }
 
         const itsLearningGet = await AsyncStorage.getItem("itslearning")
-        if (itsLearningGet == "true") { setItslearning(true) } else { setItslearning(false) }
+        if (itsLearningGet == "true") { setItslearning(true); } else { setItslearning(false); }
 
         const isBussingGet = await AsyncStorage.getItem('isBussing');
-        if (isBussingGet == "true") { setIsBussing(true) } else { setIsBussing(false) }
+        if (isBussingGet == "true") { setIsBussing(true); } else { setIsBussing(false); }
+
+        const hackerGet = await AsyncStorage.getItem('hacker');
+        if (hackerGet == "true") { setHacker(true); } else { setHacker(false); }
     }
 
     updateSwitchesFromSave();
@@ -168,6 +177,19 @@ const SecondScreen = () => {
                     value={itslearning}
                 />
                 <Text>{'\n'}{itslearning ? "På" : "Av"}</Text>
+
+
+                
+                <View style={styles.line} />
+                <Text>{'\n'}Hacker mode:{'\n'}</Text>
+                <Switch
+                    trackColor={{false: '#767577', true: '#81b0ff'}}
+                    thumbColor={hacker ? '#f5dd4b' : '#f4f3f4'}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={toggleHackerModeSwitch}
+                    value={hacker}
+                />
+                <Text>{'\n'}{hacker ? "På" : "Av"}</Text>
             </View>
         </ScrollView>
   );

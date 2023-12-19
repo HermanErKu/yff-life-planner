@@ -109,9 +109,14 @@ const SecondScreen = () => {
                 <View style={styles.line} />
                 */}
 
-                {/* What bus switch if bussing */}
-                {isBussing ? <Text style={{textAlign:'center'}}>{'\n\n'}Hvilken buss tar du? (eks: M1, 40){'\n'}</Text> : null}
-                {isBussing ? <TextInput style={{ paddingTop:20, height: 40, width:"90%", alignSelf:"center", borderColor: 'gray', borderWidth: 1 }} onChangeText={async text => await AsyncStorage.setItem('busLineStore', text)}/> : null}
+                {/* What bus switch; if bussing */}
+                {isBussing ? <Text style={{textAlign:'center'}}>{'\n\n'}Hvilken buss tar du? (eks: M1, 40){'\n'}</Text> : <Text style={{textAlign:'center'}}>{'\n\n'}Hvor kjører du?{'\n'}</Text> }
+                {isBussing ? <TextInput style={{ paddingTop: 20, height: 40, width: "90%", alignSelf: "center", borderColor: 'gray', borderWidth: 1 }} onChangeText={async text => await AsyncStorage.setItem('busLineStore', text)} /> : null}
+
+                {isBussing ? null: <Text>Fra:</Text>}
+                {isBussing ? null: <TextInput style={{ paddingTop: 20, height: 40, width: "90%", alignSelf: "center", borderColor: 'gray', borderWidth: 1 }} onChangeText={async text => await AsyncStorage.setItem('from_address', text)} />}
+                {isBussing ? null: <Text style={{marginTop:20}}>Til:</Text>}
+                {isBussing ? null : <TextInput style={{ paddingTop: 20, height: 40, width: "90%", alignSelf: "center", borderColor: 'gray', borderWidth: 1 }} onChangeText={async text => await AsyncStorage.setItem('to_address', text)} />}
                 
 
                 <View style={styles.line} />
